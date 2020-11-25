@@ -4,6 +4,14 @@ import nltk
 
 from search_by_tf_idf import search_most_similar_document
 
+"""
+Alunos:
+* Allan Braun
+* Gabriel przy
+* Valdemar ceccon
+* Matheus Bertho
+"""
+
 
 def load_json_corpus() -> pd.DataFrame:
     with open('./resources/faq_astronomia.json', 'r') as json_file:
