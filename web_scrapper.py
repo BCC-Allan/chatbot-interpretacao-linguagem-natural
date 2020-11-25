@@ -20,7 +20,7 @@ aswer_list = dom.select('.header2 + br + p')
 question_text_list = node_list_to_text_list(question_list)
 aswer_text_list = node_list_to_text_list(aswer_list)
 
-final_list = [{'question': pair[0], 'aswer': pair[1]} for pair in zip(question_text_list, aswer_text_list)]
+final_list = [{'document': pair[0], 'aswer': pair[1]} for pair in zip(question_text_list, aswer_text_list)]
 
 final_json = {'faq': final_list}
 
