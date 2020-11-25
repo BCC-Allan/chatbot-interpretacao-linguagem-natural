@@ -27,28 +27,10 @@ def demonstration_tfidf():
     print(df_tfidfvect)
 
 
-def tf_idf_vector_from_sentence_list(sentences: list, question: str) -> str:
-    # incluindo a pergunta do usuario no corpo, para que assim possa ser calculado o tf-idf dela
-    sentences.append(question)
-    tfidf_vectorizer = TfidfVectorizer(tokenizer=lemmatize_tokenize_normalize)
-    tfidf_vectors = tfidf_vectorizer.fit_transform(sentences)
-    user_question_vector = tfidf_vectors[-1]
-    similarity_matrix = cosine_similarity(user_question_vector, tfidf_vectors)
-
-    # magia negra para encontrar o mais similar na matriz
-    idx = similarity_matrix.argsort()[0][-2]
-    flat = similarity_matrix.flatten()
-    flat.sort()
-    req_tfidf = flat[-2]
-
-    # fim da magica
-    print(sentences[idx])
-    return ""
-
-
 def get_idf_vector_from_sentence_list(corpus: List[str], document: str):
+    # incluindo a pergunta do usuario no corpo, para que assim possa ser calculado o tf-idf dela
     corpus.append(document)
-    tfidf_vectorizer = TfidfVectorizer(tokenizer=lemmatize_tokenize_normalize)
+    tfidf_vectorizer = TfidfVectorizer(tokenizer=lemmatize_tokenize_normalize)  # faz a vetorização usando tf idf
     tfidf_vectors = tfidf_vectorizer.fit_transform(corpus)
     return tfidf_vectors
 
@@ -56,7 +38,7 @@ def get_idf_vector_from_sentence_list(corpus: List[str], document: str):
 def get_most_similar_index_from_vectors(vectorize_corpus, vectorize_document) -> Optional[int]:
     similarity_matrix = cosine_similarity(vectorize_document, vectorize_corpus)
 
-    # magia negra para encontrar o mais similar na matriz
+    # magia negra para encontrar o mais similar na matriz da cosine_similarity
     index = similarity_matrix.argsort()[0][-2]
     flat = similarity_matrix.flatten()
     flat.sort()
@@ -70,8 +52,13 @@ def get_most_similar_index_from_vectors(vectorize_corpus, vectorize_document) ->
 
 
 def search_most_similar_document(corpus: List[str], document: str) -> str:
+    """
+      Faz a busca de documento mais similar chamando as funções para vetorizar com tf idf e fazer a
+      cosine_similarity
+    """
     tfidf_vectors = get_idf_vector_from_sentence_list(corpus, document)
-    vectorized_document = tfidf_vectors[-1]
+    vectorized_document = tfidf_vectors[-1]  # extrai o vertor da pergunta
+    corpus.remove(document)
     index = get_most_similar_index_from_vectors(tfidf_vectors, vectorized_document)
     return corpus[index]
 

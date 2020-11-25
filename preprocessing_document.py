@@ -49,6 +49,9 @@ def normalize_sentence(text: str) -> str:
 
 
 def lemmatize_tokenize_normalize(text: str) -> List[str]:
+    """
+    lemmatiza, transforma em array de palavras e retira stop words
+    """
     normalized_text = normalize_sentence(text)
     words_tokenized_with_pos = words_with_pos_tag(normalized_text)
     lemmatizer = WordNetLemmatizer()
@@ -56,6 +59,7 @@ def lemmatize_tokenize_normalize(text: str) -> List[str]:
     final = []
 
     for word_, tag_ in words_tokenized_with_pos:
+        # lematiza cara uma das palavras ajustadas para a usa POS tag
         final.append(lemmatizer.lemmatize(word_, tag_))
 
     return final
