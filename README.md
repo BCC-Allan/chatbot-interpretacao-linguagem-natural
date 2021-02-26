@@ -1,4 +1,4 @@
-# Chat bot astonomia
+# Chat bot astronomia
 
 Esse projeto utiliza de tecnicas de processamento de linguagem natural e de comparação de vetores,
  para criar um bot ao qual responde suas perguntas sobre astronomia.  
