@@ -1,6 +1,6 @@
 """
  Nesse arquivo existem funções para o pre tratamento da string,
- retirando strop workds, nomalizando e lemmatizando
+ retirando stop words, normalizando e lemmatizando
 """
 
 from nltk.stem import WordNetLemmatizer
